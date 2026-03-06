@@ -1,14 +1,13 @@
 import express from "express";
-import { Router } from 'express';
-import {
-    listarEventos
-} from '/service.js';
+// Rotas
+import { EventosRoutes } from "./routes/EventosRoutes.js";
 
 const app = express();
 const PORT = 3000;
-const router = Router();
 
-router.get('/', listarEventos);
+app.use(express.json());
+
+app.use("/api",EventosRoutes);
 
 app.listen(PORT, () => {
     console.log(`Servidor ligado na porta ${PORT}`);
