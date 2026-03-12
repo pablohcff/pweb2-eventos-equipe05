@@ -40,6 +40,21 @@ class EventosController {
             next(error);
         }
     }
+    static async atualizarEvento(req, res, next) {
+    try {
+        const id = parseInt(req.params.id);
+        const evento = db.buscarPorId(id);
+
+        if (!evento) {
+            return res.status(404).json({ error: `Evento de id: ${id} não encontrado` });
+        }
+
+        const eventoAtualizado = db.atualizar(id, req.body);
+        res.json(eventoAtualizado);
+    } catch (err) {
+        next(err);
+    }
+}
 
     static async getAllEvents(req, res, next) {
         try {
